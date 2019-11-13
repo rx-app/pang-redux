@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import { Input, Button, List } from 'antd'
 import store from './store'
-
+import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
+import {changeInputAction , addItemAction ,deleteItemAction} from './store/actionCreators'
 
 
 class TodoList extends Component {
@@ -40,24 +41,21 @@ class TodoList extends Component {
         );
     }
     deleteItem(index){
-        const action ={type:'deleteItem',index}
+        const action = deleteItemAction(index)
         store.dispatch(action)
     }
     //添加操作的过程是：当input改变的时候，会实时向 store.inputValue 里存储当前的值
     //点击添加按钮的时候，从 store.inputValue 里获取这个值，把值添加到 store.list 里
     //input框和按钮在同一个组件里，可省略第一步，添加的时候直接取值
     clickBtn(){
-        const action = { type:'addItem' }
+        const action = addItemAction()
         store.dispatch(action)
     }
     storeChange(){
         this.setState(store.getState())
     }
     changeInputValue(e){
-        const action = { 
-            type:'changeinput',
-            value:e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
 }

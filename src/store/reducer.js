@@ -5,6 +5,23 @@ const defaultState = {
         '中午下班游泳一小时'
     ]
 }
+// 记住：Reducer里只能接收state，不能改变state。
 export default (state=defaultState , action) => {
+    if(action.type == 'changeinput'){
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.inputValue = action.value;
+        return newState
+    }
+    if(action.type == 'addItem'){
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.list.push(newState.inputValue)
+        // newState.inputValue = '' 加了这一行，添加一项后，继续点击按钮，会加入空的项
+        return newState
+    }
+    if(action.type == 'deleteItem'){
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.list.splice(action.index,1)
+        return newState
+    }
     return state
 }

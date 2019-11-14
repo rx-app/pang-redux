@@ -4,7 +4,7 @@ import { Input, Button, List } from 'antd'
 import store from './store'
 import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
 import {changeInputAction , addItemAction ,deleteItemAction} from './store/actionCreators'
-
+import TodoListUI from './TodoListUI'
 
 class TodoList extends Component {
     constructor(props) {
@@ -18,26 +18,18 @@ class TodoList extends Component {
         store.subscribe(this.storeChange)
 
         this.clickBtn = this.clickBtn.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
     }
     
     render() {
         return (
-            <div style={{ margin: '10px' }}>
-                <div>
-
-                    <Input onChange={this.changeInputValue} placeholder={this.state.inputValue} style={{ width: '250px', marginRight: '10px' }} />
-                    <Button onClick={this.clickBtn} type="primary">增加</Button>
-                </div>
-                <div style={{ margin: '10px', width: '300px' }}>
-                    <List
-                        bordered
-                        //关键代码-----------start
-                        dataSource={this.state.list}
-                        //关键代码-----------end
-                        renderItem={(item,index) => (<List.Item onClick={this.deleteItem.bind(this,index)} >{item}</List.Item>)}
-                    />
-                </div>
-            </div>
+            <TodoListUI
+                inputValue={this.state.inputValue}
+                list={this.state.list}
+                changeInputValue={this.changeInputValue}
+                clickBtn={this.clickBtn}
+                deleteItem={this.deleteItem}
+            />
         );
     }
     deleteItem(index){

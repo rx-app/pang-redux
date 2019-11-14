@@ -27,11 +27,11 @@ export default (state=defaultState , action) => {
     }
     if(action.type === GET_LIST){
         let newState = JSON.parse(JSON.stringify(state))
-        // newState.list = action.data.data.list
-        newState.list =  [
-            '早上4点起床，锻炼身体',
-            '中午下班游泳一小时'
-        ]
+        newState.list = action.data.data.list
+        // newState.list =  [
+        //     '早上4点起床，锻炼身体',
+        //     '中午下班游泳一小时'
+        // ]
         return newState
     }
     return state

@@ -28,9 +28,9 @@ class TodoList extends Component {
             const action = getListAciton(data)
             store.dispatch(action)
         },(res)=>{
-            const data = res.data
-            const action = getListAciton(data)
-            store.dispatch(action)
+            // const data = res.data
+            // const action = getListAciton(data)
+            // store.dispatch(action)
         })
     }
     

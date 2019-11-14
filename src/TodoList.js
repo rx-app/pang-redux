@@ -3,8 +3,9 @@ import 'antd/dist/antd.css'
 import { Input, Button, List } from 'antd'
 import store from './store'
 import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
-import {changeInputAction , addItemAction ,deleteItemAction} from './store/actionCreators'
+import {changeInputAction , addItemAction ,deleteItemAction,getListAciton} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
+import axios from 'axios'
 
 class TodoList extends Component {
     constructor(props) {
@@ -19,6 +20,18 @@ class TodoList extends Component {
 
         this.clickBtn = this.clickBtn.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
+    }
+    componentDidMount(){
+        
+        axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
+            const data = res.data
+            const action = getListAciton(data)
+            store.dispatch(action)
+        },(res)=>{
+            const data = res.data
+            const action = getListAciton(data)
+            store.dispatch(action)
+        })
     }
     
     render() {
